@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
 
                 response.body?.string()?.let {
+                    Log.d("OKHTTP",it)
                     val gson = Gson()
                     val categoriesResponse = gson.fromJson(it, CategoriesResponse::class.java)
 

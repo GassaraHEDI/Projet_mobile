@@ -4,11 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class CategoriesResponse {
 
-    var count: Int? = null
-    var previous: String? = null
-    var next: String? = null
-
-    @SerializedName("results")
+    @SerializedName("categories")
     var categories: List<Categorie>? = null
 }
 
