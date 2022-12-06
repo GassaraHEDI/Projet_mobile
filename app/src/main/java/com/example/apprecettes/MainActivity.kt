@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        recyclerView = findViewById(R.id.recycler_view)
         val url = URL("https://www.themealdb.com/api/json/v1/1/categories.php")
 
         val request = Request.Builder()
