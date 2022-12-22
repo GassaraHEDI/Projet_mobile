@@ -1,14 +1,16 @@
 package com.example.apprecettes
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
 import java.net.URL
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var categoriesAdapter : CategoriesAdapter
@@ -17,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val switchActivityIntent = Intent(this, ReceiptActivity::class.java)
+        startActivity(switchActivityIntent)
 
         recyclerView = findViewById(R.id.recycler_view)
         val url = URL("https://www.themealdb.com/api/json/v1/1/categories.php")
