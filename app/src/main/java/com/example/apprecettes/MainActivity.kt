@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val switchActivityIntent = Intent(this, ReceiptActivity::class.java)
+        val switchActivityIntent = Intent(this, ReceiptDetailActivity::class.java)
         startActivity(switchActivityIntent)
 
         recyclerView = findViewById(R.id.recycler_view)

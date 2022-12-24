@@ -7,19 +7,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apprecettes.model.Ingredient
 
-class ReceiptDetailViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+class ReceiptDetailIngredientsViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
     var ingredientTitle : TextView = itemView.findViewById(R.id.ingredient_title)
     var measureTitle : TextView = itemView.findViewById(R.id.measure_title)
 }
 
-class ReceiptDetailAdapter(val ingredients: List<Ingredient>): RecyclerView.Adapter<ReceiptDetailViewHolder>(){
+class ReceiptDetailIngredientsAdapter(val ingredients: List<Ingredient>): RecyclerView.Adapter<ReceiptDetailIngredientsViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReceiptDetailViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReceiptDetailIngredientsViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.ingredient_measure_item, parent, false)
-        return ReceiptDetailViewHolder(itemView)
+        return ReceiptDetailIngredientsViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ReceiptDetailViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ReceiptDetailIngredientsViewHolder, position: Int) {
         holder.ingredientTitle.setText(ingredients.get(position).ingredient)
         holder.measureTitle.setText(ingredients.get(position).measure)
     }

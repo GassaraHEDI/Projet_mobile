@@ -15,7 +15,7 @@
         android:theme="@style/Theme.AppRecettes"
         tools:targetApi="31">
         <activity
-            android:name=".ReceiptActivity"
+            android:name=".ReceiptDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

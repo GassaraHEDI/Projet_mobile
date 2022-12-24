@@ -7,25 +7,26 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apprecettes.model.Ingredient
-import com.example.apprecettes.model.Meal
-import com.example.apprecettes.model.ReceiptDetailResponse
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 import java.net.URL
 
-class ReceiptActivity : AppCompatActivity() {
-    private lateinit var receiptDetailAdapter: ReceiptDetailAdapter
-    private lateinit var recyclerView: RecyclerView
+class ReceiptDetailActivity : AppCompatActivity() {
+    private lateinit var receiptDetailIngredientsAdapter: ReceiptDetailIngredientsAdapter
+    private lateinit var receiptDetailInstructionsAdapter: ReceiptDetailInstructionsAdapter
+    private lateinit var instructionsRecyclerView: RecyclerView
+    private lateinit var ingredientsRecyclerView: RecyclerView
     private lateinit var titleText :  TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_receipt)
-        recyclerView = findViewById(R.id.receipt_ingredient_measure_recycler_view)
+        setContentView(R.layout.activity_receipt_detail)
+        ingredientsRecyclerView = findViewById(R.id.receipt_ingredient_measure_recycler_view)
+        instructionsRecyclerView = findViewById(R.id.instructions_recycler_view)
         titleText = findViewById(R.id.receipt_detail_title)
-        val url = URL("https://www.themealdb.com/api/json/v1/1/lookup.php?i=52770")
+
+        val url = URL("https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772")
 
         val request = Request.Builder()
             .url(url)
@@ -48,19 +49,30 @@ class ReceiptActivity : AppCompatActivity() {
                     val gson = Gson()
 //                    val jsonObject = gson.fromJson(meal, JsonObject::class.java)
 //                    val name = jsonObject.get("idMeal").asString
-                    Log.d("ReceiptHTTP", meal.get("strMeal") as String)
+
+                    val instructions = meal.get("strInstructions").toString().split("\n")
+                    Log.d("ReceiptHTTP", instructions.toString())
 //                    titleText.setText(meal.get("strMeal") as String)
+                    instructions?.let { it ->
+                        runOnUiThread {
+                            receiptDetailInstructionsAdapter = ReceiptDetailInstructionsAdapter(it)
+                            instructionsRecyclerView.adapter = receiptDetailInstructionsAdapter
+                            instructionsRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                            instructionsRecyclerView.setNestedScrollingEnabled(false)
+                        }
+                    }
 
                     val ingredients = mutableListOf<Ingredient>()
+
+
 
                     for (i in 1..20) {
                         val ingredient =  meal.get("strIngredient$i").toString()
                         val measure = meal.get("strMeasure$i").toString()
                         val mealIngredient = Ingredient()
-                        if (!ingredient.equals("null") && !measure.equals("null")) {
+                        if (!ingredient.equals("null") && !ingredient.equals("")) {
                             mealIngredient.ingredient = ingredient
                             mealIngredient.measure = measure
-                            Log.d("ReceiptHTTP", ingredient)
                             ingredients.add(mealIngredient)
                         }
                     }
@@ -68,13 +80,11 @@ class ReceiptActivity : AppCompatActivity() {
 //                    val receiptResponse = gson.fromJson(it, ReceiptDetailResponse::class.java)
                     ingredients?.let { it1 ->
                         runOnUiThread {
-                            receiptDetailAdapter = ReceiptDetailAdapter(it1)
-                            recyclerView.adapter = receiptDetailAdapter
-                            recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                            receiptDetailIngredientsAdapter = ReceiptDetailIngredientsAdapter(it1)
+                            ingredientsRecyclerView.adapter = receiptDetailIngredientsAdapter
+                            ingredientsRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                            ingredientsRecyclerView.setNestedScrollingEnabled(false)
                         }
-//                        Log.d("ReceiptHTTP", it1.get(0).strMeal.toString())
-//                        titleText.setText(it1.get(0).strMeal)
-
                     }
 
                 }
