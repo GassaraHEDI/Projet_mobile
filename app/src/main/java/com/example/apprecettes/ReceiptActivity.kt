@@ -1,11 +1,15 @@
 package com.example.apprecettes
 
+import android.app.ActionBar
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apprecettes.model.ReceiptResponse
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
@@ -14,13 +18,19 @@ import java.net.URL
 class ReceiptActivity: AppCompatActivity()  {
     private lateinit var receiptsAdapter: ReceiptsAdapter
     private lateinit var recyclerView: RecyclerView
-
+    private lateinit var circularProgressIndicator: CircularProgressIndicator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // calling the action bar
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setDisplayShowHomeEnabled(true)
         setContentView(R.layout.activity_receipt)
 
         recyclerView = findViewById(R.id.recycler_view2)
+        circularProgressIndicator = findViewById(R.id.progress_indicator)
+
+        circularProgressIndicator.visibility = View.VISIBLE
 
         val bundle = intent.extras
         val categoryTitle = bundle?.getString("categoryTitle").toString();
@@ -39,6 +49,9 @@ class ReceiptActivity: AppCompatActivity()  {
 
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("OKHTTP", e.localizedMessage)
+                runOnUiThread {
+                    circularProgressIndicator.visibility = View.GONE
+                }
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -50,6 +63,7 @@ class ReceiptActivity: AppCompatActivity()  {
                     Log.d("OKHTTP", "Got 1" + receiptResponse.receipts?.count() + " results")
                     receiptResponse.receipts?.let { it1 ->
                         runOnUiThread {
+                            circularProgressIndicator.visibility = View.GONE
                             receiptsAdapter = ReceiptsAdapter(it1, context = applicationContext)
                             recyclerView.adapter = receiptsAdapter
                             recyclerView.layoutManager = LinearLayoutManager(applicationContext)
@@ -61,5 +75,9 @@ class ReceiptActivity: AppCompatActivity()  {
                 }
             }
         })
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
