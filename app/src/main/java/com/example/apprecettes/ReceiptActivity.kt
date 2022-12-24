@@ -24,6 +24,7 @@ class ReceiptActivity: AppCompatActivity()  {
 
         val bundle = intent.extras
         val categoryTitle = bundle?.getString("categoryTitle").toString();
+        getSupportActionBar()?.setTitle(categoryTitle)
 
         Log.d("OKHTTP",categoryTitle)
         val url = URL("https://www.themealdb.com/api/json/v1/1/filter.php?c="+categoryTitle)

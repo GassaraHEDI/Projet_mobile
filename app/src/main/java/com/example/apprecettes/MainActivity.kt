@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        getSupportActionBar()?.setTitle("Categories")
 
         recyclerView = findViewById(R.id.recycler_view)
         val url = URL("https://www.themealdb.com/api/json/v1/1/categories.php")
