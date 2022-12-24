@@ -1,20 +1,23 @@
-package com.example.apprecettes
+package com.example.apprecette 
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.apprecettes.Categorie
+import com.example.apprecettes.CategoriesAdapter
+import com.example.apprecettes.CategoriesResponse
+import com.example.apprecettes.R
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
 import java.net.URL
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var categoriesAdapter : CategoriesAdapter
@@ -25,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         getSupportActionBar()?.setTitle("Categories")
-
         recyclerView = findViewById(R.id.recycler_view)
         val url = URL("https://www.themealdb.com/api/json/v1/1/categories.php")
 
