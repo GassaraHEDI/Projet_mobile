@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apprecettes.R
@@ -66,7 +67,7 @@ class ReceiptActivity: AppCompatActivity()  {
                             circularProgressIndicator.visibility = View.GONE
                             receiptsAdapter = ReceiptsAdapter(it1, context = applicationContext)
                             recyclerView.adapter = receiptsAdapter
-                            recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                            recyclerView.layoutManager = GridLayoutManager(applicationContext, 2)
                         }
 
                     }

@@ -1,31 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="8dp"
+    android:layout_margin="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="1dp"
-        android:background="@color/white"
-        tools:layout_editor_absoluteX="-127dp"
-        tools:layout_editor_absoluteY="6dp" />
+        <ImageView
+            android:id="@+id/imageView_categorie"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="4dp" />
 
-    <TextView
-        android:id="@+id/categorie_title"
-        android:layout_width="138dp"
-        android:layout_height="40dp"
-        android:textStyle = "bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/categorie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle = "bold"
+            android:textAlignment="center"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:textSize="18sp"
+            android:layout_margin="3dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/favorite_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_heart"
+        android:contentDescription="@string/favorite"
+        android:layout_gravity="end"
+        android:layout_margin="4dp"
+        />
+
+
+</androidx.cardview.widget.CardView>

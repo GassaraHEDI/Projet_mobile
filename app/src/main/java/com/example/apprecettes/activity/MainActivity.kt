@@ -8,12 +8,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.apprecettes.model.Categorie
-import com.example.apprecettes.adapter.CategoriesAdapter
-import com.example.apprecettes.model.CategoriesResponse
 import com.example.apprecettes.R
+import com.example.apprecettes.adapter.CategoriesAdapter
+import com.example.apprecettes.model.Categorie
+import com.example.apprecettes.model.CategoriesResponse
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         getSupportActionBar()?.setTitle("Categories")
         recyclerView = findViewById(R.id.recycler_view)
+
+
+
         val url = URL("https://www.themealdb.com/api/json/v1/1/categories.php")
 
         val request = Request.Builder()
@@ -55,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                             categories = it1
                             categoriesAdapter = CategoriesAdapter(it1, context = applicationContext)
                             recyclerView.adapter = categoriesAdapter
-                            recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                            recyclerView.layoutManager = GridLayoutManager(applicationContext, 2)
                         }
 
                     }
@@ -81,12 +84,12 @@ class MainActivity : AppCompatActivity() {
                 if (newText != null) {
 
                     recyclerView.adapter = filtredList(newText)
-                    recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                    recyclerView.layoutManager = GridLayoutManager(applicationContext, 2)
                 }
                 if (TextUtils.isEmpty(newText)){
                     categoriesAdapter =CategoriesAdapter(categories, context = applicationContext)
                     recyclerView.adapter = categoriesAdapter
-                    recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                    recyclerView.layoutManager = GridLayoutManager(applicationContext, 2)
                 }
                 return true
             }
