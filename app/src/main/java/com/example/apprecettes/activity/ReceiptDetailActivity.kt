@@ -1,4 +1,4 @@
-package com.example.apprecettes
+package com.example.apprecettes.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,9 @@ import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.apprecettes.R
+import com.example.apprecettes.adapter.ReceiptDetailIngredientsAdapter
+import com.example.apprecettes.adapter.ReceiptDetailInstructionsAdapter
 import com.example.apprecettes.model.Ingredient
 import com.google.gson.Gson
 import okhttp3.*
@@ -22,11 +25,17 @@ class ReceiptDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_receipt_detail)
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setDisplayShowHomeEnabled(true)
         ingredientsRecyclerView = findViewById(R.id.receipt_ingredient_measure_recycler_view)
         instructionsRecyclerView = findViewById(R.id.instructions_recycler_view)
         titleText = findViewById(R.id.receipt_detail_title)
+        val bundle = intent.extras
+        val receiptId = bundle?.getString("receiptId").toString()
+        val receiptTitle = bundle?.getString("receiptTitle").toString()
+        getSupportActionBar()?.setTitle(receiptTitle)
 
-        val url = URL("https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772")
+        val url = URL("https://www.themealdb.com/api/json/v1/1/lookup.php?i="+receiptId)
 
         val request = Request.Builder()
             .url(url)
@@ -46,6 +55,8 @@ class ReceiptDetailActivity : AppCompatActivity() {
                     Log.d("ReceiptHTTP",it)
                     val json = JSONObject(it)
                     val meal = json.getJSONArray("meals").getJSONObject(0)
+                    val mealTitle = meal.get("strMeal").toString()
+//                    mealTitle?.let { it ->  getSupportActionBar()?.setTitle(it)}
                     val gson = Gson()
 //                    val jsonObject = gson.fromJson(meal, JsonObject::class.java)
 //                    val name = jsonObject.get("idMeal").asString
@@ -90,5 +101,9 @@ class ReceiptDetailActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

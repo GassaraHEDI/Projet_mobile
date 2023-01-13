@@ -1,4 +1,4 @@
-package com.example.apprecettes
+package com.example.apprecettes.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.apprecettes.R
+import com.example.apprecettes.activity.ReceiptActivity
+import com.example.apprecettes.model.Categorie
 
 
 class CategorieViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){

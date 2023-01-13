@@ -1,4 +1,4 @@
-package com.example.apprecettes
+package com.example.apprecettes.model
 
 import com.google.gson.annotations.SerializedName
 

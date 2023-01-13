@@ -1,4 +1,5 @@
-package com.example.apprecette 
+package com.example.apprecettes.activity
+
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,9 +10,9 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.apprecettes.Categorie
-import com.example.apprecettes.CategoriesAdapter
-import com.example.apprecettes.CategoriesResponse
+import com.example.apprecettes.model.Categorie
+import com.example.apprecettes.adapter.CategoriesAdapter
+import com.example.apprecettes.model.CategoriesResponse
 import com.example.apprecettes.R
 import com.google.gson.Gson
 import okhttp3.*

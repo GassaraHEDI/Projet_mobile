@@ -1,13 +1,13 @@
-package com.example.apprecettes
+package com.example.apprecettes.activity
 
-import android.app.ActionBar
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.apprecettes.R
+import com.example.apprecettes.adapter.ReceiptsAdapter
 import com.example.apprecettes.model.ReceiptResponse
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.gson.Gson
