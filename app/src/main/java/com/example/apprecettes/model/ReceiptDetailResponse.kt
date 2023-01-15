@@ -1,6 +1,5 @@
 package com.example.apprecettes.model
 
-import com.example.apprecettes.model.Categorie
 import com.google.gson.annotations.SerializedName
 
 class ReceiptDetailResponse{

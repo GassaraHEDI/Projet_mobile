@@ -7,14 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apprecettes.R
 import com.example.apprecettes.adapter.ReceiptDetailIngredientsAdapter
 import com.example.apprecettes.adapter.ReceiptDetailInstructionsAdapter
 import com.example.apprecettes.model.Ingredient
-import com.google.gson.Gson
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -71,14 +69,9 @@ class ReceiptDetailActivity : AppCompatActivity() {
                         }
                     }
 
-//                    mealTitle?.let { it ->  getSupportActionBar()?.setTitle(it)}
-                    val gson = Gson()
-//                    val jsonObject = gson.fromJson(meal, JsonObject::class.java)
-//                    val name = jsonObject.get("idMeal").asString
 
                     val instructions = meal.get("strInstructions").toString().split("\n")
                     Log.d("ReceiptHTTP", instructions.toString())
-//                    titleText.setText(meal.get("strMeal") as String)
                     instructions?.let { it ->
                         runOnUiThread {
                             receiptDetailInstructionsAdapter = ReceiptDetailInstructionsAdapter(it)
@@ -103,7 +96,6 @@ class ReceiptDetailActivity : AppCompatActivity() {
                         }
                     }
                     ingredients[0].ingredient?.let { it1 -> Log.d("ReceiptHTTP", it1) }
-//                    val receiptResponse = gson.fromJson(it, ReceiptDetailResponse::class.java)
                     ingredients?.let { it1 ->
                         runOnUiThread {
                             receiptDetailIngredientsAdapter = ReceiptDetailIngredientsAdapter(it1)
