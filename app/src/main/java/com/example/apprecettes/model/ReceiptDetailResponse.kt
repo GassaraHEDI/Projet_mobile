@@ -12,6 +12,8 @@ class Meal{
     var idMeal :  Int? = null
     var strMeal : String? = null
     var strInstructions : String? = null
+    var strYoutube : String? = null
+    var strMealThumb : String? = null
 
 }
 

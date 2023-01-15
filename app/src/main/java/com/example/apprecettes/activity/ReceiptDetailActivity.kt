@@ -1,8 +1,12 @@
 package com.example.apprecettes.activity
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +25,7 @@ class ReceiptDetailActivity : AppCompatActivity() {
     private lateinit var receiptDetailInstructionsAdapter: ReceiptDetailInstructionsAdapter
     private lateinit var instructionsRecyclerView: RecyclerView
     private lateinit var ingredientsRecyclerView: RecyclerView
-    private lateinit var titleText :  TextView
+    private lateinit var button : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_receipt_detail)
@@ -29,7 +33,8 @@ class ReceiptDetailActivity : AppCompatActivity() {
         getSupportActionBar()?.setDisplayShowHomeEnabled(true)
         ingredientsRecyclerView = findViewById(R.id.receipt_ingredient_measure_recycler_view)
         instructionsRecyclerView = findViewById(R.id.instructions_recycler_view)
-        titleText = findViewById(R.id.receipt_detail_title)
+        button = findViewById(R.id.youtube)
+        button.visibility = View.GONE
         val bundle = intent.extras
         val receiptId = bundle?.getString("receiptId").toString()
         val receiptTitle = bundle?.getString("receiptTitle").toString()
@@ -56,6 +61,16 @@ class ReceiptDetailActivity : AppCompatActivity() {
                     val json = JSONObject(it)
                     val meal = json.getJSONArray("meals").getJSONObject(0)
                     val mealTitle = meal.get("strMeal").toString()
+                    val mealYoutube = meal.get("strYoutube").toString()
+
+                    if(!mealYoutube.equals("null") && !mealYoutube.equals("")){
+                        runOnUiThread { button.visibility = View.VISIBLE }
+                        button.setOnClickListener {
+                            val youtubeIntent = Intent(Intent.ACTION_VIEW,Uri.parse(mealYoutube))
+                            startActivity(youtubeIntent)
+                        }
+                    }
+
 //                    mealTitle?.let { it ->  getSupportActionBar()?.setTitle(it)}
                     val gson = Gson()
 //                    val jsonObject = gson.fromJson(meal, JsonObject::class.java)

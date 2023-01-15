@@ -5,27 +5,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="60sp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="16sp"
         android:textColor="#000000"
         android:fontFamily="sans-serif"
         android:padding="6dp"
-        android:id="@+id/instruction_info"/>
+        android:paddingLeft="12dp"
+        android:id="@+id/instruction_id"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/instruction_id"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="16sp"
         android:textColor="#000000"
         android:fontFamily="sans-serif"
         android:padding="6dp"
-        android:id="@+id/instruction_id"/>
+        android:id="@+id/instruction_info"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
